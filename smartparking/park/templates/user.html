@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slot Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        #parkingLot {
+            display: grid;
+            grid-template-columns: repeat(5, 100px);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .slot {
+            width: 100px;
+            height: 100px;
+            background: #6a11cb;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+        .slot.reserved {
+            background: #2575fc;
+            cursor: not-allowed;
+        }
+        #info {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        #reserveBtn {
+            padding: 10px 20px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        #reserveBtn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        #reserveBtn:hover:not(:disabled) {
+            background: #6a11cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Parking Slot Reservation</h1>
+    <div id="parkingLot"></div>
+    <div id="info">Select a slot to reserve.</div>
+    <button id="reserveBtn" onclick="location.href='user'">Reserve Slot</button>
+
+    <script>
+        const parkingLot = document.getElementById('parkingLot');
+        const info = document.getElementById('info');
+        const reserveBtn = document.getElementById('reserveBtn');
+        const selectedSlots = new Set(); // Set to store selected slot IDs
+
+        // Generate 10 parking slots
+        for (let i = 1; i <= 10; i++) {
+            const slot = document.createElement('div');
+            slot.classList.add('slot');
+            slot.textContent = `Slot ${i}`;
+            slot.dataset.slotId = i;
+            parkingLot.appendChild(slot);
+        }
+
+        // Event delegation to handle slot clicks
+        parkingLot.addEventListener('click', (event) => {
+            const slot = event.target.closest('.slot');
+            if (!slot || slot.classList.contains('reserved')) return; // Ignore clicks on reserved slots
+            const slotId = parseInt(slot.dataset.slotId);
+            slot.classList.add('reserved');
+            selectedSlots.add(slotId); // Add selected slot ID to the set
+            info.textContent = `You have reserved Slot ${slotId}`;
+            updateReserveButton(); // Update the Reserve Slot button status
+        });
+
+        // Function to update the status of the Reserve Slot button
+        function updateReserveButton() {
+            reserveBtn.disabled = selectedSlots.size === 0; // Enable the button if slots are selected
+        }
+
+        // Event listener for the Reserve Slot button
+        reserveBtn.addEventListener('click', () => {
+            // Implement the logic to send a message to the registered email or mobile number
+            // This could involve an AJAX request to your backend server
+            // For demonstration purposes, let's display an alert
+            alert('Your slot has been reserved ');
+        });
+    </script>
+</body>
+</html>

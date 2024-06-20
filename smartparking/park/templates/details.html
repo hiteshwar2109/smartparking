@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vehicles Log</title>
+  <style>
+    /* Add some basic styling to make the page look nicer */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 80%;
+      margin: 40px auto;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"], input[type="tel"], input[type="datetime-local"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Vehicles Log</h1>
+    <form>
+      <div class="form-group">
+        <label for="vehicleNo">Vehicle No:</label>
+        <input type="text" id="vehicleNo" name="vehicleNo" required>
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phoneNo">Phone No:</label>
+        <input type="tel" id="phoneNo" name="phoneNo" required>
+      </div>
+      <div class="form-group">
+        <label for="dateAndTime">Date and Time:</label>
+        <input type="datetime-local" id="dateAndTime" name="dateAndTime" required>
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration:</label>
+        <input type="number" id="duration" name="duration" required>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Get the current date and time
+    const currentDateAndTime = new Date();
+    const formattedDateAndTime = currentDateAndTime.toLocaleString();
+
+    // Set the default value of the date and time input field
+    document.getElementById("dateAndTime").value = formattedDateAndTime;
+  </script>
+</body>
+</html>
